@@ -1,0 +1,20 @@
+fun main() {
+    val nums = intArrayOf(1,-1,0)
+    var ans = subarraySum(nums, 0)
+    print(ans)
+}
+
+
+
+fun subarraySum(nums: IntArray, k: Int): Int {
+    var map = hashMapOf(0 to 1)
+    var ans = 0
+    var sum = 0
+    for (i in 0 .. nums.size - 1) {
+        sum += nums[i]
+        val prefix = sum - k
+        ans += map.getOrDefault(prefix, 0)
+        map[sum] = map.getOrDefault(sum, 0) + 1
+    }
+    return ans
+}
